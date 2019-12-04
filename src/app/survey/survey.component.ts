@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
+import { FirestoreService } from '../services/firestore/firestore.service';
 
 export interface Opciones {
   value: string;
@@ -15,6 +16,12 @@ export interface Opciones {
   styleUrls: ['./survey.component.css']
 })
 export class SurveyComponent implements OnInit {
+
+  constructor(private fb: FormBuilder, private firestoreService: FirestoreService) { 
+
+  }
+
+
 
   valoracionesTxt = ['terminator','desempleo'];
 
@@ -37,7 +44,7 @@ export class SurveyComponent implements OnInit {
       "Ciencias Biológicas",
       "Otras carreras relacionadas con Ciencias Naturales y Exactas",
     ]
-  }
+ }
 
   encuestaForm = this.fb.group({
     aliases: this.fb.array([
@@ -67,17 +74,21 @@ export class SurveyComponent implements OnInit {
     this.aliases.push(this.fb.control(''));
   }
 
-  constructor(private fb: FormBuilder) { }
+  
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    
     console.warn(this.encuestaForm.value);
+    this.firestoreService.createRegistro(this.encuestaForm.value).then (() => {
+      console.log("locura en movimiento")
+    })
+   
   }
 
   ngOnInit() {
     console.warn(this.valoracionesTxt);
     console.warn(this.carreras);
+
+
   }
 
 }

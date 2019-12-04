@@ -8,8 +8,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 //import { FormBuilder } from '@angular/forms'
 
+//COMPOENENTES INTERNOS
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SurveyComponent } from './survey/survey.component';
+
+//FIREBASE
+import { AngularFireModule } from '@angular/fire';
+import { FirestoreService } from './services/firestore/firestore.service';
+import { environment } from '../environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 
 @NgModule({
   declarations: [
@@ -22,9 +30,13 @@ import { SurveyComponent } from './survey/survey.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [
+    AngularFirestore,
+    FirestoreService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

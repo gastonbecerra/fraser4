@@ -1,8 +1,8 @@
-carreras
+<!-- carreras
 <div *ngFor="let c of carreras">
     carrera
     {{c}}
-</div>
+</div> -->
 
 
 
@@ -18,6 +18,12 @@ carreras
                 <mat-form-field>
                     <input matInput placeholder="Palabra {{i+1}}" [formControlName]="i" minlength="3">
                 </mat-form-field>
+                <div>
+                    Muy negativo (0/10)
+                    <mat-slider thumbLabel tickInterval="1" min="0" max="10" value="5"></mat-slider>
+                    Muy positivo (10/10)        
+                </div>    
+    
             </div>
             <button mat-button color="primary" (click)="addAlias()">Agregar otra palabra</button>
         </div>
