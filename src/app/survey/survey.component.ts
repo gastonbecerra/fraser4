@@ -18,6 +18,27 @@ export class SurveyComponent implements OnInit {
 
   valoracionesTxt = ['terminator','desempleo'];
 
+  carreras = {
+    "1 CIENCIAS NATURALES Y EXACTAS" : [
+      "Matemáticas",
+      "Ciencias de la Computación e Información",
+      "Ciencias Físicas",
+      "Ciencias Químicas",
+      "Ciencias de la Tierra y relacionadas con el Medio Ambiente",
+      "Ciencias Biológicas",
+      "Otras carreras relacionadas con Ciencias Naturales y Exactas",
+    ],
+    "2 CIENCIAS NATURALES Y EXACTAS" : [
+      "Matemáticas",
+      "Ciencias de la Computación e Información",
+      "Ciencias Físicas",
+      "Ciencias Químicas",
+      "Ciencias de la Tierra y relacionadas con el Medio Ambiente",
+      "Ciencias Biológicas",
+      "Otras carreras relacionadas con Ciencias Naturales y Exactas",
+    ]
+  }
+
   encuestaForm = this.fb.group({
     aliases: this.fb.array([
       this.fb.control('', Validators.required),
@@ -56,6 +77,7 @@ export class SurveyComponent implements OnInit {
 
   ngOnInit() {
     console.warn(this.valoracionesTxt);
+    console.warn(this.carreras);
   }
 
 }

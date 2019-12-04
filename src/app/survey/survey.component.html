@@ -1,3 +1,11 @@
+carreras
+<div *ngFor="let c of carreras">
+    carrera
+    {{c}}
+</div>
+
+
+
 <div class="mat-headline">Encuesta</div>
 
 <form [formGroup]="encuestaForm" (ngSubmit)="onSubmit()">
@@ -56,6 +64,7 @@
                 </mat-select>
             </mat-form-field>
             </div>
+
 
             <p>Eso es todo! Muchas gracias!</p>
             <button mat-raised-button color="accent" type="submit" [disabled]="!encuestaForm.valid">Enviar</button>
