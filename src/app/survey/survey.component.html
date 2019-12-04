@@ -1,69 +1,66 @@
-<!-- estoy siguiendo este ejemplo
-    https://material.angular.io/components/stepper/overview
- -->
-
 <div class="mat-headline">Encuesta</div>
 
-<mat-vertical-stepper linear="true" #stepper>
+<form [formGroup]="encuestaForm" (ngSubmit)="onSubmit()">
+<mat-vertical-stepper #stepper>
     <mat-step>
-        <ng-template matStepLabel>Evocación de palabras</ng-template>
+        <ng-template matStepLabel>Evocación de palabras</ng-template>      
         <p>Por favor, indicanos qué palabras o frases se te vienen a la mente cuando te decimos "<strong>inteligencia artificial</strong>"</p>
-        
-        <div>
-            <button mat-button matStepperNext>Siguiente</button>
+        <div formArrayName="aliases">
+            <div *ngFor="let palabras of aliases.controls; let i=index">
+                <mat-form-field>
+                    <input matInput placeholder="Palabra {{i+1}}" [formControlName]="i" minlength="3">
+                </mat-form-field>
+            </div>
+            <button mat-button color="primary" (click)="addAlias()">Agregar otra palabra</button>
         </div>
-
+        <div>
+            <button mat-raised-button matStepperNext color="primary">Siguiente</button>
+        </div>
     </mat-step>
+
     <mat-step>
         <ng-template matStepLabel>Evaluación de palabras</ng-template>
+        <p>Por favor, indicanos cuán positivas o negativas te parecen las siguientes palabras, cuando se refieren a "<strong>inteligencia artificial</strong>"</p>
+
+        <div *ngFor="let valores of valoracionesTxt; let j=index">
+            <label>Palabra: <strong>{{valores}}</strong></label>
+            <div>
+                Muy negativo (0/10)
+                <mat-slider thumbLabel tickInterval="1" min="0" max="10" value="5"></mat-slider>
+                Muy positivo (10/10)        
+            </div>    
+        </div>
 
         <div>
-            <button mat-button matStepperPrevious>Volver</button>
-            <button mat-button matStepperNext>Siguiente</button>
+            <button mat-raised-button matStepperPrevious color="primary">Volver</button>
+            <button mat-raised-button matStepperNext color="primary">Siguiente</button>
         </div>
 
     </mat-step>
+
     <mat-step>
-        <ng-template matStepLabel>Datos sociodemográficos</ng-template>
+        <div formGroupName="sociodemo">
+        <ng-template matStepLabel>Datos sociodemográficos</ng-template>        
+            <div>
+            <mat-form-field>
+                <input matInput placeholder="Edad (en años)" formControlName="edad" required>
+            </mat-form-field>
+            </div>
+            <div>
+            <mat-form-field>
+                <mat-label>Sexo</mat-label>
+                <mat-select formControlName="sexo" required>
+                    <mat-option value="mujer">Mujer</mat-option>
+                    <mat-option value="varon">Varon</mat-option>                
+                    <mat-option value="otro">Otro</mat-option>
+                </mat-select>
+            </mat-form-field>
+            </div>
 
+            <p>Eso es todo! Muchas gracias!</p>
+            <button mat-raised-button color="accent" type="submit" [disabled]="!encuestaForm.valid">Enviar</button>
+        </div>
     </mat-step>    
-</mat-vertical-stepper>      
 
-<!-- 
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-      </button>
-      <mat-horizontal-stepper [linear]="isLinear" #stepper>
-        <mat-step [stepControl]="firstFormGroup">
-          <form formGroup="firstFormGroup">
-            <ng-template matStepLabel>Fill out your name</ng-template>
-            <mat-form-field>
-              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperNext>Next</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step [stepControl]="secondFormGroup">
-          <form formGroup="secondFormGroup">
-            <ng-template matStepLabel>Fill out your address</ng-template>
-            <mat-form-field>
-              <input matInput placeholder="Address" formControlName="secondCtrl" required>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          You are now done.
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-          </div>
-        </mat-step>
-      </mat-horizontal-stepper>
-       -->
+</mat-vertical-stepper>      
+</form>

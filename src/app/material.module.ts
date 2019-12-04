@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { 
   MatButtonModule, 
@@ -6,9 +7,11 @@ import {
   MatMenuModule, 
   MatExpansionModule,
   MatStepperModule,
+  MatSliderModule
 } from '@angular/material';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -19,6 +22,9 @@ const MaterialComponents = [
   MatExpansionModule,
   MatStepperModule,
   MatFormFieldModule,
+  MatInputModule,
+  MatSliderModule,
+  MatSelectModule
 ]
 
 @NgModule({
