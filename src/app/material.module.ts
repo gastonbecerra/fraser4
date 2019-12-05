@@ -7,11 +7,13 @@ import {
   MatMenuModule, 
   MatExpansionModule,
   MatStepperModule,
-  MatSliderModule
+  MatSliderModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
+import { MatCheckbox } from '@angular/material';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -24,7 +26,8 @@ const MaterialComponents = [
   MatFormFieldModule,
   MatInputModule,
   MatSliderModule,
-  MatSelectModule
+  MatSelectModule,
+  MatCheckboxModule,
 ]
 
 @NgModule({

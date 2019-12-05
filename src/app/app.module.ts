@@ -9,7 +9,6 @@ import { MaterialModule } from './material.module';
 //import { FormBuilder } from '@angular/forms'
 
 //COMPOENENTES INTERNOS
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { SurveyComponent } from './survey/survey.component';
 
 //FIREBASE
@@ -22,7 +21,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     SurveyComponent
   ],
   imports: [

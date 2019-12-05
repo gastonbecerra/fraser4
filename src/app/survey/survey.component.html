@@ -1,81 +1,104 @@
-<!-- carreras
-<div *ngFor="let c of carreras">
-    carrera
-    {{c}}
-</div> -->
+<div class="presentación">
+    <div class="mat-headline">Hola!</div>
+    <p>Nuestro grupo de estudio sobre big data y ciencias sociales está llevando a cabo una breve encuesta acerca de <strong>nuevas tecnologías</strong>.</p>
+    <p>Esta encuesta está destinada a <strong>estudiantes terciarios o universitarios (de cualquier carrera) de Argentina</strong>.</p>
+    <p>La encuesta es anónima. Responderla lleva menos de 3 minutos y lo podés hacer tanto desde tu celular como desde una computadora.</p>
+    <p>Tu respuesta nos ayudará a conocer el impacto social de estas nuevas tecnologías. La encuesta es anónima y los resultados serán utilizados con fines académicos.</p>
+</div>
 
+<div class="encuesta">
+    <form [formGroup]="encuestaForm" (ngSubmit)="onSubmit()">
+    <mat-vertical-stepper #stepper>
+        <mat-step>
+            <ng-template matStepLabel>Evocación de palabras</ng-template>      
+            <p>Por favor, indicanos qué palabras o frases te vienen a la mente en relación a "<strong>{{estimulo}}</strong>", e indicanos si para vos tienen un sentido positivo o negativo utilizando el deslizador.</p>
+            <div formArrayName="aliases">
+                <div *ngFor="let palabras of aliases.controls; let i=index">
+                    <div>
+                        <mat-form-field>
+                            <input matInput placeholder="Palabra {{i+1}}" [formControlName]="i" minlength="3">
+                        </mat-form-field>            
+                    </div>
+                    <div>
+                        Muy negativo (0/10)
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="10" value="5"></mat-slider>
+                        Muy positivo (10/10)        
+                    </div>    
+        
+                </div>
+                <button mat-button color="primary" (click)="addAlias()">Agregar otra palabra</button>
+            </div>
+            <div>
+                <button mat-raised-button matStepperNext type="button" color="primary">Siguiente</button>
+            </div>
+        </mat-step>
 
-
-<div class="mat-headline">Encuesta</div>
-
-<form [formGroup]="encuestaForm" (ngSubmit)="onSubmit()">
-<mat-vertical-stepper #stepper>
-    <mat-step>
-        <ng-template matStepLabel>Evocación de palabras</ng-template>      
-        <p>Por favor, indicanos qué palabras o frases se te vienen a la mente cuando te decimos "<strong>inteligencia artificial</strong>"</p>
-        <div formArrayName="aliases">
-            <div *ngFor="let palabras of aliases.controls; let i=index">
-                <mat-form-field>
-                    <input matInput placeholder="Palabra {{i+1}}" [formControlName]="i" minlength="3">
-                </mat-form-field>
+        <mat-step>
+            <div formGroupName="sociodemo">
+            <ng-template matStepLabel>Datos sociodemográficos</ng-template>        
                 <div>
-                    Muy negativo (0/10)
-                    <mat-slider thumbLabel tickInterval="1" min="0" max="10" value="5"></mat-slider>
-                    Muy positivo (10/10)        
-                </div>    
-    
+                <mat-form-field>
+                    <input matInput placeholder="Edad (en años)" formControlName="edad" required>
+                </mat-form-field>
+                </div>
+                <div>
+                <mat-form-field>
+                    <mat-label>Sexo</mat-label>
+                    <mat-select formControlName="sexo" required>
+                        <mat-option value="mujer">Mujer</mat-option>
+                        <mat-option value="varon">Varon</mat-option>                
+                        <mat-option value="otro">Otro</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Máximo nivel de estudio</mat-label>
+                        <mat-select formControlName="nivel_estudios" required>
+                            <mat-option value="uni_curso">Universitario en curso</mat-option>
+                            <mat-option value="uni_completo">Universitario completo</mat-option>                
+                            <mat-option value="posgrado_curso">Posgrado en curso</mat-option>
+                            <mat-option value="posgrado_completo">Posgrado completo</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>        
+                <div>
+                    <mat-form-field>
+                        <mat-label>Carrera / Area de estudios</mat-label>
+                        <mat-select [(value)]="selectedValue" formControlName="carrera" required>
+                        <mat-option>None</mat-option>
+                        <mat-optgroup *ngFor="let p of populations" label="{{p.text}}">
+                            <mat-option *ngFor="let pp of p.children" value="{{pp.text}}">{{pp.text}}</mat-option>
+                        </mat-optgroup>
+                        </mat-select>
+                    </mat-form-field>                                
+                </div>
+                <div>
+                    <p>¿A través de qué medios te informas sobre <strong>{{estimulo}}</strong>?</p>
+                    <p>
+                        <mat-checkbox formControlName="medios_formacion">Formación universitaria y de posgrado</mat-checkbox><br />
+                        <mat-checkbox formControlName="medios_cursos">Cursos, tutoriales y capacitaciones (fuera de tu carrera)</mat-checkbox><br />
+                        <mat-checkbox formControlName="medios_sitios">Sitios de internet especializados y posteos en redes sociales</mat-checkbox><br />
+                        <mat-checkbox formControlName="medios_diarios">Diarios y sitios online de noticias</mat-checkbox></p>
+                    <p>
+                        <label>Por favor, nombra el principal medio seleccionado:</label>
+                        <mat-form-field class="example-full-width">
+                            <input matInput formControlName="medio" placeholder="E.j., Clarín, Stack Overflow">
+                        </mat-form-field>                            
+                    </p>
+                </div> 
+                <div>
+                    <button mat-raised-button matStepperPrevious color="primary">Volver</button>    
+                </div>
+
+                <div>
+                    <p>Eso es todo! Muchas gracias!</p>
+                    <button mat-raised-button color="accent" type="submit" [disabled]="!encuestaForm.valid">Enviar</button>
+                </div>
+
             </div>
-            <button mat-button color="primary" (click)="addAlias()">Agregar otra palabra</button>
-        </div>
-        <div>
-            <button mat-raised-button matStepperNext color="primary">Siguiente</button>
-        </div>
-    </mat-step>
+        </mat-step>    
 
-    <mat-step>
-        <ng-template matStepLabel>Evaluación de palabras</ng-template>
-        <p>Por favor, indicanos cuán positivas o negativas te parecen las siguientes palabras, cuando se refieren a "<strong>inteligencia artificial</strong>"</p>
-
-        <div *ngFor="let valores of valoracionesTxt; let j=index">
-            <label>Palabra: <strong>{{valores}}</strong></label>
-            <div>
-                Muy negativo (0/10)
-                <mat-slider thumbLabel tickInterval="1" min="0" max="10" value="5"></mat-slider>
-                Muy positivo (10/10)        
-            </div>    
-        </div>
-
-        <div>
-            <button mat-raised-button matStepperPrevious color="primary">Volver</button>
-            <button mat-raised-button matStepperNext color="primary">Siguiente</button>
-        </div>
-
-    </mat-step>
-
-    <mat-step>
-        <div formGroupName="sociodemo">
-        <ng-template matStepLabel>Datos sociodemográficos</ng-template>        
-            <div>
-            <mat-form-field>
-                <input matInput placeholder="Edad (en años)" formControlName="edad" required>
-            </mat-form-field>
-            </div>
-            <div>
-            <mat-form-field>
-                <mat-label>Sexo</mat-label>
-                <mat-select formControlName="sexo" required>
-                    <mat-option value="mujer">Mujer</mat-option>
-                    <mat-option value="varon">Varon</mat-option>                
-                    <mat-option value="otro">Otro</mat-option>
-                </mat-select>
-            </mat-form-field>
-            </div>
-
-
-            <p>Eso es todo! Muchas gracias!</p>
-            <button mat-raised-button color="accent" type="submit" [disabled]="!encuestaForm.valid">Enviar</button>
-        </div>
-    </mat-step>    
-
-</mat-vertical-stepper>      
-</form>
+    </mat-vertical-stepper>      
+    </form>
+</div>
