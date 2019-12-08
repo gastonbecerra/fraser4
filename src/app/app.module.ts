@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 
 import { MaterialModule } from './material.module';
 //import { FormBuilder } from '@angular/forms'
@@ -16,12 +17,14 @@ import { AngularFireModule } from '@angular/fire';
 import { FirestoreService } from './services/firestore/firestore.service';
 import { environment } from '../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { GraciasComponent } from './gracias/gracias.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SurveyComponent
+    SurveyComponent,
+    GraciasComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    JwSocialButtonsModule
   ],
   providers: [
     AngularFirestore,

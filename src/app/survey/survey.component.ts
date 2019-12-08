@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-// import { FormGroup, FormControl } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { FirestoreService } from '../services/firestore/firestore.service';
+import { Router } from '@angular/router';
 
 export interface Opciones {
   value: string;
@@ -17,112 +15,116 @@ export interface Opciones {
 })
 export class SurveyComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private firestoreService: FirestoreService) { }
+  constructor(private fb: FormBuilder, private formBuilder: FormBuilder, private firestoreService: FirestoreService, private router: Router) { }
 
   private estimulos = ['Big data', 'Inteligencia artificial', 'Conocimiento', 'Aprendizaje automático (machine learning)', 'Ciencia de datos'];
+  public tiempo : string;
+  public data : string;
   public estimulo : string;
-
-  public populations = [
-    { text: "CIENCIAS NATURALES Y EXACTAS",
+  public carreras = [
+    { text: "NATURALES Y EXACTAS",
       children: [
         { text: "Matemáticas" },
-        { text: "Ciencias de la Computación e Información" },
-        { text: "Ciencias Físicas" },
-        { text: "Ciencias Químicas" },
-        { text: "Ciencias de la Tierra y el medio ambiente" },
-        { text: "Ciencias Biológicas" },
-        { text: "Otras carreras relacionadas con las Ciencias Naturales y Exactas" },
+        { text: "Computación e Informática" },
+        { text: "Física" },
+        { text: "Química" },
+        { text: "Medio ambiente" },
+        { text: "Biología" },
+        { text: "Otras Naturales y Exactas" },
       ] }, 
       { text: "INGENIERÍAS Y TECNOLOGÍAS",
       children: [
-        { text: "Ingeniería Civil" },
-        { text: "Ingeniería Eléctrica, Ingeniería Electrónica e Ingeniería de la Información" },
-        { text: "Ingeniería Mecánica" },
-        { text: "Ingeniería Química" },
-        { text: "Ingeniería Médica" },
-        { text: "Ingeniería del Medio Ambiente" },
-        { text: "Biotecnología Industrial" },
+        { text: "Ing. Civil" },
+        { text: "Ing. Eléctrica y de la Información" },
+        { text: "Ing. Mecánica" },
+        { text: "Ing. Química" },
+        { text: "Ing. Médica" },
+        { text: "Ing. del Medio Ambiente" },
+        { text: "Biotecnología" },
         { text: "Nanotecnología" },
-        { text: "Otras carreras relacionadas con Ingenierías y Tecnologías" },
+        { text: "Otras Ingenierías" },
       ] }, 
       { text: "CIENCIAS MÉDICAS Y DE LA SALUD",
       children: [
         { text: "Medicina" },
         { text: "Ciencias de la Salud" },
-        { text: "Biotecnología de la Salud" },
-        { text: "Otras carreras relacionadas con Ciencias Médicas y de la Salud" },
+        { text: "Biotecnología" },
+        { text: "Otras Médicas y de la Salud" },
       ] },
       { text: "CIENCIAS AGRÍCOLAS Y ANIMALES",
       children: [
-        { text: "Agricultura, Silvicultura y Pesca" },
-        { text: "Producción Animal y Lechería" },
-        { text: "Ciencias Veterinarias" },
+        { text: "Agricultura" },
+        { text: "Producción Animal" },
+        { text: "Veterinarias" },
         { text: "Biotecnología Agropecuaria" },
-        { text: "Otras carreras relacionadas con Ciencias Agrícolas" },
+        { text: "Otras de Ciencias Agrícolas" },
       ] },
       { text: "CIENCIAS SOCIALES Y EMPRESARIALES",
       children: [
         { text: "Psicología" },
-        { text: "Economía, Negocios y Administración de empresas" },
+        { text: "Economía, Negocios y Administración" },
         { text: "Educación" },
         { text: "Sociología y Política" },
-        { text: "Urbanismo, Geografía Económica y Social, y Arquitectura" },
+        { text: "Urbanismo, Geografía y Arquitectura" },
         { text: "Comunicación y Medios" },
-        { text: "Turismo, Hospitalidad, Eventos y Gastronomía" },
+        { text: "Turismo, Eventos y Gastronomía" },
         { text: "Derecho" },
-        { text: "Otras carreras relacionadas con Ciencias Sociales y empresariales" },
+        { text: "Otras Ciencias Sociales y empresariales" },
       ] },
       { text: "HUMANIDADES",
       children: [
-        { text: "Historia, Antropología y Arqueología" },
+        { text: "Historia y Antropología" },
         { text: "Lengua y Literatura" },
-        { text: "Filosofía, Ética y Religión" },
+        { text: "Filosofía y Religión" },
         { text: "Arte" },
-        { text: "Otras carreras relacionadas con Humanidades" },
+        { text: "Otras Humanidades" },
       ] },
   ];
 
-  encuestaForm = this.fb.group({
-    aliases: this.fb.array([
-      this.fb.control('', Validators.required),
-      /*
-      this.fb.control('', Validators.required),
-      this.fb.control('', Validators.required),
-      this.fb.control('', Validators.required),
-      this.fb.control('', Validators.required),
-      */
-    ]),
-    sociodemo: this.fb.group({
-      edad: ['', Validators.required],
-      sexo: ['', Validators.required],
-      nivel_estudios: [''],
-      carrera: [''],
-      medio: [''],
-      medios_diarios: [''], medios_sitios: [''], medios_cursos: [''], medios_formacion: [''],
-    }),
-  });
+  // https://jasonwatmore.com/post/2019/06/25/angular-8-dynamic-reactive-forms-example
+  dynamicForm: FormGroup;
 
-  get aliases() {
-    return this.encuestaForm.get('aliases') as FormArray;
+  ngOnInit() {
+    const current = new Date();
+    this.tiempo = current.getTime().toString();
+    this.estimulo = this.estimulos[Math.floor(Math.random() * this.estimulos.length)]; // selecciona el estimulo
+    this.dynamicForm = this.formBuilder.group({
+      tiempo: [this.tiempo],
+      estimulo: [this.estimulo],
+      terms: new FormArray([]),
+      sociodemo: this.fb.group({
+        edad: [, Validators.required],
+        sexo: ['', Validators.required],
+        nivel_estudios: [''],
+        carrera: [''],
+        medio: [''],
+        medios_diarios: [false], medios_sitios: [false], medios_cursos: [false], medios_formacion: [false],
+      }),
+    });
+    this.agregarCampos(3);
   }
 
-  addAlias() {
-    this.aliases.push(this.fb.control(''));
+  get f() { return this.dynamicForm.controls; }
+  get t() { return this.f.terms as FormArray; }
+
+  agregarCampos(cuantos: number) {
+    for (let i = 0; i < cuantos; i++) {
+      this.t.push(this.formBuilder.group({
+          palabra: ['', Validators.required],
+          valoracion: [5],
+          orden: [],
+      }));
+    }
   }
 
   onSubmit() {
-    console.warn(this.encuestaForm.value);
-    // hay que sumarle el estimulo
-    // hay que sumarle un timestamp
-    // hay que sumarle las valoraciones
-    // this.firestoreService.createRegistro(this.encuestaForm.value).then (() => {
-    //   console.log("registro grabado")
-    // })   
-  }
-
-  ngOnInit() {
-    // selecciona el estimulo
-    this.estimulo = this.estimulos[Math.floor(Math.random() * this.estimulos.length)];
+    // console.log( JSON.stringify( this.dynamicForm.value ) );
+    this.data = this.dynamicForm.value;
+    console.log( this.data );
+    this.firestoreService.createRegistro(this.data).then (() => {
+       console.log("registro grabado");
+       this.router.navigate(['gracias']);
+    })   
   }
 
 }
