@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'evoc';
+  urlHosting = 'https://evoc-67321.web.app';
 }

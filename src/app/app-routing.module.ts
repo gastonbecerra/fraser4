@@ -10,13 +10,6 @@ const routes: Routes = [
   { path: 'survey', component: SurveyComponent },
   { path: 'gracias', component: GraciasComponent },
 
-  /*
-  { path: 'callback', component: CallbackComponent },   // viene de autenticacion
-  // { path: 'modulos', component: ModulosComponent, canActivate: [AuthGuard]},
-  { path: 'modulos', component: ModulosComponent },
-  { path: 'modulo/:modulo', component: ModuloComponent },
-  { path: '**', component: ModulosComponent },
-  */
 ];
 
 @NgModule({

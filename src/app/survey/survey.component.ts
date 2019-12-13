@@ -17,7 +17,7 @@ export class SurveyComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private formBuilder: FormBuilder, private firestoreService: FirestoreService, private router: Router) { }
 
-  private estimulos = ['Big data', 'Inteligencia artificial', 'Conocimiento', 'Aprendizaje automático (machine learning)', 'Ciencia de datos'];
+  private estimulos = ['Big data', 'Inteligencia artificial', 'Conocimiento', 'Ciencia de datos'];
   public tiempo : string;
   public data : string;
   public estimulo : string;
@@ -101,7 +101,7 @@ export class SurveyComponent implements OnInit {
         medios_diarios: [false], medios_sitios: [false], medios_cursos: [false], medios_formacion: [false],
       }),
     });
-    this.agregarCampos(3);
+    this.agregarCampos(5);
   }
 
   get f() { return this.dynamicForm.controls; }
@@ -120,9 +120,9 @@ export class SurveyComponent implements OnInit {
   onSubmit() {
     // console.log( JSON.stringify( this.dynamicForm.value ) );
     this.data = this.dynamicForm.value;
-    console.log( this.data );
+    // console.log( this.data );
     this.firestoreService.createRegistro(this.data).then (() => {
-       console.log("registro grabado");
+       // console.log("registro grabado");
        this.router.navigate(['gracias']);
     })   
   }

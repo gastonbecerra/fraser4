@@ -11,14 +11,16 @@ import { MaterialModule } from './material.module';
 
 //COMPOENENTES INTERNOS
 import { SurveyComponent } from './survey/survey.component';
+import { GraciasComponent } from './gracias/gracias.component';
 
 //FIREBASE
 import { AngularFireModule } from '@angular/fire';
-import { FirestoreService } from './services/firestore/firestore.service';
-import { environment } from '../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { GraciasComponent } from './gracias/gracias.component';
+import { AngularFireDatabase } from '@angular/fire/database';
 
+
+import { environment } from '../environments/environment';
+import { FirestoreService } from './services/firestore/firestore.service'; // el servicio
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { GraciasComponent } from './gracias/gracias.component';
   ],
   providers: [
     AngularFirestore,
+    AngularFireDatabase,
     FirestoreService
   ],
   bootstrap: [AppComponent]

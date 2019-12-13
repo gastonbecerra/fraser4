@@ -1,0 +1,37 @@
+[debug] [2019-12-13T21:47:42.901Z] ----------------------------------------------------------------------
+[debug] [2019-12-13T21:47:42.903Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\GASTON\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-12-13T21:47:42.903Z] CLI Version:   7.10.0
+[debug] [2019-12-13T21:47:42.903Z] Platform:      win32
+[debug] [2019-12-13T21:47:42.903Z] Node Version:  v10.16.2
+[debug] [2019-12-13T21:47:42.904Z] Time:          Fri Dec 13 2019 18:47:42 GMT-0300 (GMT-03:00)
+[debug] [2019-12-13T21:47:42.904Z] ----------------------------------------------------------------------
+[debug] [2019-12-13T21:47:42.904Z] 
+[debug] [2019-12-13T21:47:42.913Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-13T21:47:42.913Z] > authorizing via signed-in user
+[debug] [2019-12-13T21:47:42.914Z] [iam] checking project evoc-67321 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-12-13T21:47:42.915Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-12-13T21:47:42.915Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-12-13T21:47:43.202Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-13T21:47:43.206Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/evoc-67321:testIamPermissions  
+
+[debug] [2019-12-13T21:47:44.559Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-13T21:47:44.560Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/evoc-67321  
+ 
+[debug] [2019-12-13T21:47:45.927Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'evoc-67321'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-12-13T21:47:45.931Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/evoc-67321/versions  
+
+[debug] [2019-12-13T21:47:47.945Z] <<< HTTP RESPONSE 200
+[info] i  hosting[evoc-67321]: beginning deploy...
+[info] i  hosting[evoc-67321]: found 24 files in dist/evoc
+[debug] [2019-12-13T21:47:50.535Z] [hosting] hash cache [ZGlzdFxldm9j] stored for 24 files
+[debug] [2019-12-13T21:47:50.535Z] [hosting][hash queue][FINAL]
+[debug] [2019-12-13T21:47:50.535Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/evoc-67321/versions/ca526ca234c5f4ff:populateFiles  
+ <request body omitted>
+[debug] [2019-12-13T21:47:52.342Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-13T21:47:52.351Z] [hosting][populate queue][FINAL]
+[debug] [2019-12-13T21:47:52.351Z] [hosting] uploads queued: 17
