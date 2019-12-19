@@ -95,8 +95,8 @@ export class SurveyComponent implements OnInit {
       sociodemo: this.fb.group({
         edad: [, Validators.required],
         sexo: ['', Validators.required],
-        nivel_estudios: [''],
-        carrera: [''],
+        nivel_estudios: ['', Validators.required],
+        carrera: ['', Validators.required],
         medio: [''],
         medios_diarios: [false], medios_sitios: [false], medios_cursos: [false], medios_formacion: [false],
       }),

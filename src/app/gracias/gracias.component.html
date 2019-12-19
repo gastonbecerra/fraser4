@@ -1,10 +1,14 @@
 <div class="presentacion">
     <div class="mat-headline">Muchas gracias!</div>
-    <p>Tu contribución nos ayuda a entender mejor estos nuevos fenómenos tecnológicos!</p>
+    <p>Tu contribución nos ayuda a entender mejor estos nuevos fenómenos!</p>
     <p>&nbsp;</p>
     <p>Si querés, podés volver a tomar el test (te tocará una nueva palabra), <a routerLink="/survey">haciendo click aquí.</a></p>
     <p>&nbsp;</p>
     <p>O podés darnos una mano compartiendo nuestra encuesta en tus redes sociales:</p>
+    <p>{{url}}
+        &nbsp;
+        <button mat-raised-button color="primary" (click)="copyMessage()" value="click to copy" >Copiar</button>
+    </p>
     <p><fb-like url="{{url}}"></fb-like></p>
     <p><linkedin-share url="{{url}}"></linkedin-share></p>
     <p></p>

@@ -1,7 +1,8 @@
 <div class="presentacion">
-    <div class="mat-headline">Hola!</div>
-    <p>Nuestro grupo de estudio e investigación sobre big data y ciencias sociales está llevando a cabo una breve encuesta acerca de nuevas tecnologías y cómo las mismas están impactando en nuestras vidas.</p>
-    <p>Esta encuesta está destinada a <strong>estudiantes o graduados recientes de terciarios y universidades (de cualquier carrera y nivel) de Argentina</strong>.</p>
+    <div class="mat-headline">Tema: <span class="estimulo_titulo">{{estimulo}}</span></div>
+    <!-- <div class="mat-headline">¿En qué pensas cuando te dicen "<span class="estimulo_titulo">{{estimulo}}</span>"?</div> -->
+    <p>Un grupo de estudio e investigación conformado por investigadores y docentes de la Universidad de Buenos Aires, Universidad Abierta Interamericana, y la Universidad Nacional de Quilmes está llevando a cabo una breve encuesta acerca de nuevas tecnologías, qué significados adquieren para los distintos grupos sociales, y cómo impactan en nuestras vidas.</p>
+    <p>Esta encuesta está destinada a <strong>estudiantes o graduados recientes (últimos 3 años) de terciarios y universidades, de cualquier carrera y nivel de Argentina</strong>.</p>
     <p>Responderla lleva menos de 3 minutos y lo podés hacer tanto desde tu celular como desde una computadora. Las respuestas son anónimas y los resultados serán utilizados exclusívamente para fines académicos.</p>
 </div>
 
@@ -11,8 +12,8 @@
         <mat-vertical-stepper #stepper>
 
             <mat-step>
-                <ng-template matStepLabel>Evocación de palabras</ng-template>      
-                <p>Por favor, indicanos qué palabras o frases te vienen a la mente en relación a "<strong>{{estimulo}}</strong>", e indicanos si para vos tienen un sentido positivo o negativo utilizando el deslizador.</p>                                    
+                <ng-template matStepLabel>Test de evocación</ng-template>      
+                <p>Por favor, indicanos qué palabras o frases te vienen a la mente en relación a <span class="estimulo_titulo">{{estimulo}}</span>, e indicanos si para vos tienen un sentido positivo o negativo utilizando el deslizador.</p>                                    
                 <div *ngFor="let term of t.controls; let i = index" class="list-group list-group-flush">
                     <div class="list-group-item">
                         <div [formGroup]="term" class="form-row">
@@ -45,7 +46,7 @@
 
             <mat-step>
                 <div formGroupName="sociodemo">
-                <ng-template matStepLabel>Datos sociodemográficos</ng-template>        
+                <ng-template matStepLabel>Tus datos sociodemográficos</ng-template>        
                     <div>
                     <mat-form-field>
                         <input matInput placeholder="Edad (en años)" formControlName="edad" required minlength="1" maxlength="2">
@@ -84,12 +85,12 @@
                         </mat-form-field>                                
                     </div>
                     <div>
-                        <p>¿A través de qué medios te informas sobre <strong>{{estimulo}}</strong>?</p>
+                        <p>¿A través de qué medios te informas sobre <span class="estimulo_titulo">{{estimulo}}</span>?</p>
                         <p>
-                            <mat-checkbox formControlName="medios_formacion">Formación universitaria y de posgrado</mat-checkbox><br />
-                            <mat-checkbox formControlName="medios_cursos">Cursos, tutoriales y capacitaciones (fuera de tu carrera)</mat-checkbox><br />
-                            <mat-checkbox formControlName="medios_sitios">Sitios de internet especializados y posteos en redes sociales</mat-checkbox><br />
-                            <mat-checkbox formControlName="medios_diarios">Diarios y sitios online de noticias</mat-checkbox></p>
+                            <mat-checkbox formControlName="medios_formacion">Formación universitaria o de posgrado</mat-checkbox><br />
+                            <mat-checkbox formControlName="medios_cursos">Cursos por fuera de tu carrera</mat-checkbox><br />
+                            <mat-checkbox formControlName="medios_sitios">Posteos, sitios y tutoriales</mat-checkbox><br />
+                            <mat-checkbox formControlName="medios_diarios">Diarios y sitios de noticias</mat-checkbox></p>
                         <p>
                             <label>Por favor, nombrá el principal medio seleccionado: </label>
                             <mat-form-field class="example-full-width">
