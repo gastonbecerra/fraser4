@@ -1,8 +1,8 @@
 <div class="presentacion">
     <div class="mat-headline">Tema: <span class="estimulo_titulo">{{estimulo}}</span></div>
     <!-- <div class="mat-headline">¿En qué pensas cuando te dicen "<span class="estimulo_titulo">{{estimulo}}</span>"?</div> -->
-    <p>Un grupo de estudio e investigación conformado por investigadores y docentes de la Universidad de Buenos Aires, Universidad Abierta Interamericana, y la Universidad Nacional de Quilmes está llevando a cabo una breve encuesta acerca de nuevas tecnologías, qué significados adquieren para los distintos grupos sociales, y cómo impactan en nuestras vidas.</p>
-    <p>Esta encuesta está destinada a <strong>estudiantes o graduados recientes (últimos 3 años) de terciarios y universidades, de cualquier carrera y nivel de Argentina</strong>.</p>
+    <p>Un grupo de estudio e investigación de la Universidad de Buenos Aires, Universidad Abierta Interamericana, y la Universidad Nacional de Quilmes está llevando a cabo una breve encuesta acerca de nuevas tecnologías y los sentidos que estas adquieren en la sociedad.</p>
+    <p>Esta encuesta está destinada a <strong>estudiantes o graduados recientes de terciarios y universidades, de cualquier carrera y nivel de Argentina</strong>.</p>
     <p>Responderla lleva menos de 3 minutos y lo podés hacer tanto desde tu celular como desde una computadora. Las respuestas son anónimas y los resultados serán utilizados exclusívamente para fines académicos.</p>
 </div>
 
@@ -13,7 +13,8 @@
 
             <mat-step>
                 <ng-template matStepLabel>Test de evocación</ng-template>      
-                <p>Por favor, indicanos qué palabras o frases te vienen a la mente en relación a <span class="estimulo_titulo">{{estimulo}}</span>, e indicanos si para vos tienen un sentido positivo o negativo utilizando el deslizador.</p>                                    
+                <p>Por favor, indicanos qué palabras o frases te vienen a la mente cuando pensás en "<span class="estimulo_titulo">{{estimulo}}</span>", 
+                    e indicanos si para vos tienen un sentido positivo o negativo utilizando el deslizador.</p>                                    
                 <div *ngFor="let term of t.controls; let i = index" class="list-group list-group-flush">
                     <div class="list-group-item">
                         <div [formGroup]="term" class="form-row">
@@ -21,9 +22,10 @@
                                 <input type="hidden" formControlName="orden" [ngModel]="i + 1">
                                 <label>Palabra {{i+1}}</label>: &nbsp;
                                 <mat-form-field>
-                                    <input matInput placeholder="Palabra {{i+1}}" formControlName="palabra" minlength="2" maxlength="50" pattern="[a-zA-Z ]*">
-                                    <mat-hint>(Solo letras y espacios)</mat-hint>
+                                    <input matInput placeholder="Palabra {{i+1}}" formControlName="palabra" minlength="2" maxlength="50" >
 
+                                    <!-- pattern="[a-zA-Z ]*" -->
+                                    <!-- <mat-hint>(Solo letras y espacios)</mat-hint> -->
                                     <!-- falta validacion (solo alfa?) / como es un control dinamico, no logro invocarlo -->
                                     <!-- <mat-error *ngIf="palabra.hasError('required')">
                                             This field is required
@@ -92,19 +94,19 @@
                             <mat-checkbox formControlName="medios_sitios">Posteos, sitios y tutoriales</mat-checkbox><br />
                             <mat-checkbox formControlName="medios_diarios">Diarios y sitios de noticias</mat-checkbox></p>
                         <p>
-                            <label>Por favor, nombrá el principal medio seleccionado: </label>
+                            <label>Por favor, nombrá tu principal fuente de referencia para este tema: </label>
                             <mat-form-field class="example-full-width">
                                 <input matInput formControlName="medio" placeholder="E.j., Clarín, Stack Overflow">
                             </mat-form-field>                            
                         </p>
                     </div> 
-                    <div>
-                        <button mat-raised-button matStepperPrevious color="primary">Volver al test de evocación</button>    
-                    </div>
-                    <div>
+                    <div *ngIf="dynamicForm.valid">
                         <p>Eso es todo! Muchas gracias!</p>
                         <button mat-raised-button color="accent" type="submit" [disabled]="!dynamicForm.valid">Enviar</button>
-                        <div *ngIf="!dynamicForm.valid">(Hay campos obligatorios sin completar marcados en rojo)</div>
+                    </div>
+                    <div *ngIf="!dynamicForm.valid">
+                        <div class="warning">Hay campos obligatorios sin completar (marcados en rojo). Por favor, revisalos para poder enviar.</div>
+                        <button mat-raised-button matStepperPrevious color="primary">Volver al test de evocación</button>
                     </div>
                 </div>
             </mat-step>    
