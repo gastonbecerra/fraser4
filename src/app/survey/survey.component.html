@@ -13,8 +13,8 @@
 
             <mat-step>
                 <ng-template matStepLabel>Test de evocación</ng-template>      
-                <p>Por favor, indicanos qué palabras o frases te vienen a la mente cuando pensás en "<span class="estimulo_titulo">{{estimulo}}</span>", 
-                    e indicanos si para vos tienen un sentido positivo o negativo utilizando el deslizador.</p>                                    
+                <p>Por favor, indicanos qué palabras o frases te vienen a la mente cuando pensás en "<span class="estimulo_titulo">{{estimulo}}</span>"</p>
+                <p>También te pedimos que, por favor, nos indiques si estas ideas que acabas de introducir se corresponden con algo que valoras positivamente (algo que te agrada) o negativamente (algo que te desagrada), utilizando el deslizador debajo de cada palabra.</p>
                 <div *ngFor="let term of t.controls; let i = index" class="list-group list-group-flush">
                     <div class="list-group-item">
                         <div [formGroup]="term" class="form-row">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <div><button mat-button color="primary" (click)="agregarCampos(1)" type="button">Agregar otra palabra</button></div>
+                <div><button mat-button color="primary" (click)="agregarCampos(1)" type="button">Se te ocurren otras ideas? Podés agregar otra palabra haciendo click aquí!</button></div>
                 <div><button mat-raised-button matStepperNext type="button" color="primary">Siguiente (tus datos sociodemográficos)</button></div>
             </mat-step>
 
