@@ -17,7 +17,7 @@ export class SurveyComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private formBuilder: FormBuilder, private firestoreService: FirestoreService, private router: Router) { }
 
-  private estimulos = ['Big data', 'Inteligencia artificial', 'Conocimiento', 'Ciencia de datos', 'Big data', 'Inteligencia artificial', 'Big data', 'Inteligencia artificial', 'Tecnologías 4.0', 'Ciencia de datos'];
+  private estimulos = ['Big data', 'Inteligencia artificial', 'Conocimiento', 'Ciencia de datos', 'Big data', 'Inteligencia artificial', 'Big data', 'Inteligencia artificial', 'Ciencia de datos', 'Big data', 'Big data'];
   public tiempo : string;
   public data : string;
   public estimulo : string;
