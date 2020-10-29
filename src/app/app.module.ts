@@ -18,7 +18,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireDatabase } from '@angular/fire/database';
 
-
 import { environment } from '../environments/environment';
 import { FirestoreService } from './services/firestore/firestore.service'; // el servicio
 

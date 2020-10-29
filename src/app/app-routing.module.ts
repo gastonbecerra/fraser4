@@ -9,6 +9,7 @@ const routes: Routes = [
   // { path: '', redirectTo: '/survey', pathMatch: 'full' },
   { path: '', component: SurveyComponent },
   { path: 'surv', component: SurveyComponent , pathMatch: 'prefix'},
+  { path: 'surve', component: SurveyComponent , pathMatch: 'prefix'},
   { path: 'survey', component: SurveyComponent , pathMatch: 'prefix'},
   { path: 'gracias', component: GraciasComponent , pathMatch: 'prefix'},
 
