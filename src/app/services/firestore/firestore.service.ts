@@ -13,17 +13,37 @@ export class FirestoreService {
     private db: AngularFireDatabase
   ) {}
 
-  // Crea un nuevo registo con una mezcla de estos links:
-  // https://github.com/angular/angularfire/issues/199
-  // https://github.com/angular/angularfire/blob/HEAD/docs/rtdb/objects.md
-  // https://blog.nubecolectiva.com/como-integrar-firebase-y-angular-7-listado-de-datos-desde-firebase-parte-3-final/
-
   public createRegistro(data) {
     // return this.firestore.collection('evocacion').add(data);    
     const item1 = data;    
     const pushId = this.db.createPushId();
     const item2 = { ...item1, id: pushId };;
     return this.db.list('/evocaciones').set(item2.id, item2);
+  }
+
+  public getOraciones() {
+    return this.db.list('/oraciones').snapshotChanges();
+  }
+
+  public getOracionesArray() {
+    let data = [];
+    this.db.list('/oraciones').snapshotChanges().subscribe(oraciones => {
+      oraciones.forEach((catData: any) => {
+        data.push({
+          oracion: catData.payload.child("oracion").val(),
+          estado: catData.payload.child("estado").val(),
+          id: catData.key,
+        });
+      })
+    });
+    console.log(data)
+    return data;
+  }
+
+  public setOraciones(oracion) {
+    // https://medium.com/angular-chile/angular-6-y-firestore-b7f270adcc96
+    this.db.list('/oraciones').set(oracion.id, oracion);
+    // return this.getOracionesArray();
   }
 
 }

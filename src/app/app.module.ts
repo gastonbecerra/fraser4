@@ -12,6 +12,7 @@ import { MaterialModule } from './material.module';
 //COMPOENENTES INTERNOS
 import { SurveyComponent } from './survey/survey.component';
 import { GraciasComponent } from './gracias/gracias.component';
+import { OracionesComponent } from './oraciones/oraciones.component';
 
 //FIREBASE
 import { AngularFireModule } from '@angular/fire';
@@ -25,7 +26,8 @@ import { FirestoreService } from './services/firestore/firestore.service'; // el
   declarations: [
     AppComponent,
     SurveyComponent,
-    GraciasComponent
+    GraciasComponent,
+    OracionesComponent
   ],
   imports: [
     BrowserModule,

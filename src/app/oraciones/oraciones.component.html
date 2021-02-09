@@ -1,0 +1,30 @@
+<!-- {{ data | json }} -->
+
+<div style="width: 100%;">
+    <div *ngFor="let d of data" style="text-align: center; width: 350px; margin: auto;">
+        <p>
+            <strong>
+                {{ d.id }} | {{ d.oracion }}
+            </strong>
+        </p>
+        <p>
+            Clasificación: 
+            <em style="color: blueviolet;">
+                {{ d.estado }}
+            </em>
+        </p>
+    
+        <p>
+            <button mat-raised-button color="primary" (click)="setEstado(d,'positivo')">Positivo</button>
+            <button mat-raised-button color="warn" (click)="setEstado(d,'negativo')">Negativo</button>
+        </p>
+        <p>        
+            <button mat-raised-button color="basic" (click)="setEstado(d,'')">Borrar clasificación</button>
+            <button mat-raised-button color="basic" (click)="setEstado(d,'descartar')">Descartar</button>
+        </p>
+    
+        <hr />
+    </div>
+    
+</div>
+
